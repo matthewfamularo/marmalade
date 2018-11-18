@@ -1,30 +1,18 @@
 import React from "react";
-
-const Stat = ({ statName, statNumber, statWord }) => (
-  <div
-    className="w-third tc pa3 ba bw2 b--light-gray"
-    style={{ marginRight: -2 }}
-  >
-    <div className="f6 biryani ttu">{statName}</div>
-    <div className="f5 biryani-black ttu tracked">
-      {statNumber} {statWord}
-    </div>
-  </div>
-);
+import Stat from "./Stat.js";
+import { connect } from "react-redux";
 
 const About = ({ mixes }) => (
-  <div className="ph5 ph4-l">
-    <div className="measure center lh-copy f4 ph3">
+  <div className="ph3 ph4-l pad-bottom">
+    <div className="measure center lh-copy ">
       <p className="mt0">
         Marmalade.fm features the latest and greatest in grooves, beats and
         world music.
       </p>
-      <p>
+      <p className="mb4">
         Whether you’re into hip hop, trip hop, classic jazz, fusion jazz, afro
         beat or break beat… we have you covered!
       </p>
-    </div>
-    <div className="flex pt3">
       <Stat statName="Featuring" statNumber={mixes.length} statWord="mixes" />
       <Stat
         statName="Played"
@@ -46,4 +34,4 @@ const About = ({ mixes }) => (
   </div>
 );
 
-export default About;
+export default connect(state => state)(About);

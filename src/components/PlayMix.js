@@ -1,12 +1,29 @@
 import React from "react";
-
-const PlayMix = ({ playMix, id, currentMix, playing, children }) => (
+import { connect } from "react-redux";
+import actions from "../store/actions.js";
+import classNames from "classnames";
+const PlayMix = ({
+  playMix,
+  id,
+  currentMix,
+  playing,
+  children,
+  className,
+  fromMixcloud
+}) => (
   <div
-    className={`pointer ${id === currentMix && playing && "playing"}`}
-    onClick={() => playMix(id)}
+    className={classNames({
+      [className]: className,
+      playing: id === currentMix && playing && fromMixcloud,
+      loading: id === currentMix && !playing && !fromMixcloud
+    })}
+    onClick={() => playMix({ currentMix: id, fromMixcloud: false })}
   >
     {children}
   </div>
 );
 
-export default PlayMix;
+export default connect(
+  state => state,
+  actions
+)(PlayMix);
